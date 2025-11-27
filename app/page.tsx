@@ -1,6 +1,21 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { AppSidebar } from "@/components/app-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 
 type CardItem = {
   id: number;
@@ -163,7 +178,8 @@ function MiniCalendar({
     a.getDate() === b.getDate();
 
   return (
-    <div className="w-[260px] rounded-lg border border-black/10 bg-white p-3 text-sm shadow-lg dark:border-white/15 dark:bg-black">
+    
+    <div className="w-[260px] rounded-lg border border-black/10 bg-white p-3 text-sm shadow-lg dark:border-white/15 dark:bg-black bg-[#D46D85]">
       <div className="mb-2 flex items-center justify-between">
         <button
           onClick={() => {
@@ -366,12 +382,12 @@ export default function Board() {
             <button
               onClick={() => setOpenFilter(openFilter === "fecha" ? null : "fecha")}
               className="
-                h-9 w-36 rounded-md border border-black/10 bg-white px-3 text-sm text-zinc-800
+                h-9 w-36 rounded-md border border-black/10  px-3 text-sm text-zinc-800
                 dark:border-white/15 dark:bg-black dark:text-zinc-200
-                flex items-center justify-between
+                flex items-center justify-between    h-9 w-36 rounded-md border border-black/10  px-3 text-sm text-zinc-800   bg-[#D46D85] dark:text-zinc-200   flex items-center justify-between   
               "
             >
-              <span>{selectedDate ? selectedDate.toLocaleDateString() : "Fecha"}</span>
+              <span className="text-white">{selectedDate ? selectedDate.toLocaleDateString() : "Fecha"}</span>
               <span className="text-xs opacity-60">▾</span>
             </button>
 
@@ -390,12 +406,12 @@ export default function Board() {
             <button
               onClick={() => setOpenFilter(openFilter === "curso" ? null : "curso")}
               className="
-                h-9 w-36 rounded-md border border-black/10 bg-white px-3 text-sm text-zinc-800
+                h-9 w-36 rounded-md border border-black/10 bg-[#D46D85] px-3 text-sm text-zinc-800
                 dark:border-white/15 dark:bg-black dark:text-zinc-200
                 flex items-center justify-between
               "
             >
-              <span>{selectedCourse ?? "Curso"}</span>
+              <span className="text-white">{selectedCourse ?? "Curso"}</span>
               <span className="text-xs opacity-60">▾</span>
             </button>
 
@@ -425,12 +441,12 @@ export default function Board() {
             <button
               onClick={() => setOpenFilter(openFilter === "profesor" ? null : "profesor")}
               className="
-                h-9 w-36 rounded-md border border-black/10 bg-white px-3 text-sm text-zinc-800
+                h-9 w-36 rounded-md border border-black/10 bg-[#D46D85] px-3 text-sm text-zinc-800
                 dark:border-white/15 dark:bg-black dark:text-zinc-200
-                flex items-center justify-between
+                flex items-center justify-between text-white
               "
             >
-              <span>{selectedProfessor ?? "Profesor"}</span>
+              <span className="text-white">{selectedProfessor ?? "Profesor"}</span>
               <span className="text-xs opacity-60">▾</span>
             </button>
 
@@ -447,8 +463,8 @@ export default function Board() {
           <button
             onClick={() => setCreateOpen(true)}
             className="
-              h-9 rounded-md border border-black/10 px-4 text-sm text-zinc-900
-              hover:bg-black/[.04] dark:border-white/15 dark:text-zinc-100 dark:hover:bg-white/10
+              h-9 rounded-md border border-black/10 px-4 text-sm 
+              hover:bg-black/[.04] dark:border-white/15  dark:hover:bg-white/10 bg-[#D46D85] text-white
             "
           >
             + crear
@@ -464,9 +480,9 @@ export default function Board() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscador"
               className="
-                h-10 w-full rounded-md border border-black/10 bg-white pl-9 pr-3 text-sm
+                h-10 w-full rounded-md border border-black/10  pl-9 pr-3 text-sm
                 text-zinc-900 placeholder:text-zinc-400
-                dark:border-white/15 dark:bg-black dark:text-zinc-100 dark:placeholder:text-zinc-600
+                dark:border-white/15 dark:bg-black dark:text-zinc-100 dark:placeholder:text-zinc-600 bg-[#124D58]
               "
             />
           </div>
@@ -474,7 +490,7 @@ export default function Board() {
           <button
             className="
               h-10 w-32 shrink-0 rounded-md border border-black/10 text-sm text-zinc-900
-              hover:bg-black/[.04] dark:border-white/15 dark:text-zinc-100 dark:hover:bg-white/10
+              hover:bg-black/[.04] dark:border-white/15 dark:text-zinc-100 dark:hover:bg-white/10 bg-[#124D58]
             "
           >
             Ordenar por &nbsp;›
@@ -490,11 +506,11 @@ export default function Board() {
                 key={tag}
                 onClick={() => setActiveTag(active ? null : tag)}
                 className={`
-                  h-8 rounded-md border px-3 text-sm
+                  h-8 rounded-md border px-3 text-sm text-white
                   ${active ? "border-black/30 dark:border-white/40" : "border-black/10 dark:border-white/15"}
-                  text-zinc-900 dark:text-zinc-100
-                  hover:bg-black/[.04] dark:hover:bg-white/10
-                `}
+                  
+                  hover:bg-black/[.04] dark:hover:bg-white/10 text-white bg-[#D46D85]
+                `} 
               >
                 {tag}
               </button>
@@ -619,8 +635,8 @@ function CreateModal({
       <div
         ref={panelRef}
         className="
-          mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 rounded-xl bg-white p-5 shadow-xl
-          dark:bg-black sm:grid-cols-[1.2fr_0.8fr]
+          mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 rounded-xl  p-5 shadow-xl
+          dark:bg-black sm:grid-cols-[1.2fr_0.8fr] bg-[#F5F5F5]
         "
       >
         {/* LEFT FORM */}
@@ -660,7 +676,7 @@ function CreateModal({
                     key={c}
                     onClick={() => toggleCat(c)}
                     className={`
-                      h-8 rounded-md border px-3 text-sm
+                      h-8 rounded-md border px-3 text-sm bg-[#D46D85]
                       ${active ? "border-black/30 dark:border-white/40" : "border-black/10 dark:border-white/15"}
                       hover:bg-black/[.04] dark:hover:bg-white/10
                     `}
@@ -675,13 +691,13 @@ function CreateModal({
           <div className="mt-2 flex justify-end gap-2">
             <button
               onClick={onClose}
-              className="h-9 rounded-md border border-black/10 px-4 text-sm hover:bg-black/[.04] dark:border-white/15 dark:hover:bg-white/10"
+              className="h-9 rounded-md border border-black/10 px-4 text-sm hover:bg-black/[.04] dark:border-white/15 dark:hover:bg-white/10 bg-[#D46D85]"
             >
               Cancelar
             </button>
             <button
               onClick={onSave}
-              className="h-9 rounded-md border border-black/20 px-4 text-sm font-medium hover:bg-black/[.06] dark:border-white/25 dark:hover:bg-white/10"
+              className="h-9 rounded-md border border-black/20 px-4 text-sm font-medium hover:bg-black/[.06] dark:border-white/25 dark:hover:bg-white/10 bg-[#D46D85]"
             >
               Guardar
             </button>
